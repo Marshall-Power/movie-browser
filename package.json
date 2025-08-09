@@ -10,7 +10,8 @@
     "build:server": "vite build --ssr src/entry-server.tsx --outDir dist/server",
     "preview": "cross-env NODE_ENV=production node server",
     "lint": "eslint . --ext .ts,.tsx",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "types": "tsc --noEmit --project ./tsconfig.app.json && tsc --noEmit --project ./tsconfig.node.json"
   },
   "dependencies": {
     "compression": "^1.8.1",
