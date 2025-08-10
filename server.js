@@ -33,13 +33,32 @@ if (!isProduction) {
   app.use(base, sirv('./dist/client', { extensions: [] }));
 }
 
-app.get('/api/movies', async (_req, res) => {
-  const token = process.env.TMDB_API_TOKEN;
-  const url = 'https://api.themoviedb.org/3/movie/popular?language=en-US&page=1';
-  const apiRes = await fetch(url, {
-    headers: { accept: 'application/json', Authorization: `Bearer ${token}` },
+
+async function tmdb(path) {
+  const res = await fetch(`https://api.themoviedb.org/3${path}`, {
+    headers: {
+      method: 'GET',
+      accept: 'application/json',
+      Authorization: `Bearer ${process.env.TMDB_API_TOKEN}`,
+    },
   });
-  res.json(await apiRes.json());
+  if (!res.ok) throw new Error(`TMDB ${path} failed: ${res.status}`);
+  return res.json();
+}
+
+// /api/home now returns all carousels
+app.get('/api/movies', async (_req, res) => {
+  try {
+    const [popular, topRated, upcoming] = await Promise.all([
+      tmdb('/movie/popular?language=en-US&page=1'),
+      tmdb('/movie/top_rated?language=en-US&page=1'),
+      tmdb('/movie/upcoming?language=en-US&page=1'),
+    ]);
+    res.json({ popular, topRated, upcoming });
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: 'Failed to fetch TMDB home data' });
+  }
 });
 
 // Serve HTML
