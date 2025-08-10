@@ -8,6 +8,11 @@ const base = process.env.BASE || '/';
 const safeSerialize = (data) => {
   return JSON.stringify(data).replace(/</g, '\\u003c');
 };
+function readTheme(req) {
+  const cookie = req.headers.cookie || '';
+  const m = cookie.match(/(?:^|;\s*)theme=(light|dark)/);
+  return m?.[1] || 'dark'; // default
+}
 
 // Cached production assets
 const templateHtml = isProduction ? await fs.readFile('./dist/client/index.html', 'utf-8') : '';
@@ -32,7 +37,6 @@ if (!isProduction) {
   app.use(compression());
   app.use(base, sirv('./dist/client', { extensions: [] }));
 }
-
 
 async function tmdb(path) {
   const res = await fetch(`https://api.themoviedb.org/3${path}`, {
@@ -83,10 +87,12 @@ app.use('*all', async (req, res) => {
     const apiRes = await fetch(`http://localhost:${port}/api/movies`);
     const initialData = await apiRes.json();
 
+    const theme = readTheme(req);
     const rendered = await render({ _url: url, initialData });
     const html = template
       .replace(`<!--app-head-->`, rendered.head ?? '')
       .replace(`<!--app-html-->`, rendered.html ?? '')
+      .replace('data-theme="%THEME%"', `data-theme="${theme}"`)
       .replace(
         `<!--ssr-data-->`,
         `<script>window.__INITIAL_DATA__=${safeSerialize(rendered.initialData)}</script>`,

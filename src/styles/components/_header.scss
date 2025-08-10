@@ -1,0 +1,19 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background: var(--card);
+}
+.header__brand {
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--fg);
+}
+.header__toggle {
+  border: 0;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  background: var(--fg);
+  color: var(--bg);
+}
