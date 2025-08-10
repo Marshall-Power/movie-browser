@@ -1,14 +1,14 @@
-import './index.css'
-import { StrictMode } from 'react'
-import { hydrateRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
-import { Router } from './router'
+import './index.css';
+import { StrictMode } from 'react';
+import { hydrateRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import { Router } from './router';
 
 hydrateRoot(
   document.getElementById('root') as HTMLElement,
   <StrictMode>
     <BrowserRouter>
-      <Router/>
+      <Router initialData={(window as any).__INITIAL_DATA__} />
     </BrowserRouter>
   </StrictMode>,
-)
+);

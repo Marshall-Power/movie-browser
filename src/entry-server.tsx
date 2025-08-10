@@ -5,15 +5,16 @@ import { Router } from './router';
 
 interface RenderPropType {
   _url: string;
+  initialData: any;
 }
 
-export function render({ _url }: RenderPropType) {
+export function render({ _url, initialData }: RenderPropType) {
   const html = renderToString(
     <StrictMode>
       <StaticRouter location={_url}>
-        <Router />
+        <Router initialData={initialData} />
       </StaticRouter>
     </StrictMode>,
   );
-  return { html };
+  return { html, initialData };
 }
