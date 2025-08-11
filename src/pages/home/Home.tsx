@@ -1,11 +1,12 @@
-import { Header } from '../../components/header/Header';
+import { JSX } from 'react';
+import { Header } from '../../components';
 
-export function Home({ initialData }: any) {
-  console.log(initialData);
+export const Home = ({ initialData }: any): JSX.Element => {
+  console.log(initialData)
   return (
-    <>
-      <Header />
-      <h1>Home</h1>
-    </>
+    <div className="home">
+        <Header />
+      <div className="home__content"></div>
+    </div>
   );
 }

@@ -1,9 +1,31 @@
 .header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: var(--bg, #000);
+  padding-inline: var(--page-gutter, 1.5rem);
+  padding-block: 1rem;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem;
-  background: var(--card);
+
+  
+  border-bottom: 1px solid var(--header-separator, #444);
+
+  
+  :root {
+    --header-separator: #ccc; 
+  }
+  [data-theme='dark'] {
+    --header-separator: #444; 
+  }
+
+  @media (max-width: 600px) {
+    padding-block: 0.75rem;
+  }
 }
 .header__brand {
   font-weight: 700;
