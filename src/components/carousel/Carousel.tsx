@@ -1,15 +1,15 @@
-import { useEffect, useCallback } from 'react';
+import { useCallback } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import { Card, Button } from '../../components';
 
 export function Carousel({ title, items }: any) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false, dragFree: true });
 
-  useEffect(() => {
-    if (emblaApi) {
-      console.log(emblaApi.slideNodes()); // Access API
-    }
-  }, [emblaApi]);
+  // useEffect(() => {
+  //   if (emblaApi) {
+  //     console.log(emblaApi.slideNodes()); // Access API
+  //   }
+  // }, [emblaApi]);
 
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
@@ -25,7 +25,7 @@ export function Carousel({ title, items }: any) {
         <div className="embla__container">
           {items.map(({ id, title, imageUrl }: any) => (
             <div key={id} className="embla__slide">
-                <Card id={id} title={title} imageUrl={imageUrl} href={`movie/${id}`} />
+              <Card id={id} title={title} imageUrl={imageUrl} href={`movie/${id}`} />
             </div>
           ))}
         </div>

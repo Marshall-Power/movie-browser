@@ -1,0 +1,21 @@
+:root {
+  --font-base: 'Inter', system-ui, sans-serif;
+}
+
+body {
+  font-family: var(--font-base);
+  font-size: 1rem; /* 16px */
+  line-height: 1.5;
+  color: var(--color-text, #222);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 0.5em;
+}

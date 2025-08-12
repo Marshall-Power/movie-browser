@@ -2,7 +2,6 @@ import { JSX } from 'react';
 import { Header, Carousel } from '../../components';
 
 export const Home = ({ initialData }: any): JSX.Element => {
-  console.log(initialData);
   return (
     <div className="home">
       <Header />

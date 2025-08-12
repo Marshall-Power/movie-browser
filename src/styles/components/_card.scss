@@ -22,7 +22,7 @@
 .card__image-container {
   position: relative;
   width: 100%;
-  aspect-ratio: 2/3; /* Standard movie poster ratio */
+  aspect-ratio: 2/3;
   overflow: hidden;
   background: #f0f0f0;
 }
@@ -89,7 +89,6 @@
   padding: 20px;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .card__content {
     padding: 10px;
