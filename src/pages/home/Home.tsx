@@ -11,7 +11,7 @@ export const Home = ({ initialData }: HomePageProps) => {
       <Header />
       <div className="home__content">
         {initialData.map((element: any) => {
-          return <Carousel key={element.name} title={element.name} items={element.movies} />;
+          return <Carousel key={element.name} name={element.name} items={element.movies} />;
         })}
       </div>
     </div>

@@ -1,12 +1,7 @@
 export interface TMDBMovie {
   id: number;
   title: string;
-  overview: string;
-  poster_path: string | null;
-  backdrop_path: string | null;
-  release_date: string;
-  genre_ids: number[];
-  vote_average: number;
+  imageUrl: string;
 }
 
 export interface TMDBPaginatedResponse<T> {
@@ -18,7 +13,7 @@ export interface TMDBPaginatedResponse<T> {
 
 export interface TMDBCategoryData {
   name: string;
-  movies: TMDBMovie[];
+  items: TMDBMovie[];
 }
 
 

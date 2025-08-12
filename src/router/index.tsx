@@ -1,7 +1,12 @@
 import { Route, Routes } from 'react-router-dom';
 import { Home, Movie } from '../pages';
+import { HomeInitialData } from '../types';
 
-export const Router = ({ initialData }: any) => {
+interface RouterProps {
+  initialData: HomeInitialData;
+}
+
+export const Router = ({ initialData }: RouterProps) => {
   return (
     <Routes>
       <Route index path="/" element={<Home initialData={initialData} />} />
