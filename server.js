@@ -50,7 +50,6 @@ async function tmdb(path) {
   return res.json();
 }
 
-// /api/home now returns all carousels
 app.get('/api/movies', async (_req, res) => {
   try {
     const [popular, topRated, upcoming] = await Promise.all([
@@ -85,10 +84,23 @@ app.use('*all', async (req, res) => {
     }
 
     const apiRes = await fetch(`http://localhost:${port}/api/movies`);
-    const initialData = await apiRes.json();
+    const MoviesData = await apiRes.json();
+    const TMDB_BASE_URL = 'https://image.tmdb.org/t/p/w500';
+    function mapTMDBData(data) {
+      return Object.entries(data).map(([categoryName, categoryData]) => ({
+        name: categoryName,
+        movies: categoryData.results.map((movie) => ({
+          id: movie.id,
+          title: movie.title,
+          imageUrl: `${TMDB_BASE_URL}${movie.poster_path}`,
+        })),
+      }));
+    }
+
+    const mappedMoviesData = mapTMDBData(MoviesData);
 
     const theme = readTheme(req);
-    const rendered = await render({ _url: url, initialData });
+    const rendered = await render({ _url: url, initialData: mappedMoviesData });
     const html = template
       .replace(`<!--app-head-->`, rendered.head ?? '')
       .replace(`<!--app-html-->`, rendered.html ?? '')
