@@ -1,7 +1,11 @@
-import { JSX } from 'react';
 import { Header, Carousel } from '../../components';
+import { HomeInitialData } from '../../types';
 
-export const Home = ({ initialData }: any): JSX.Element => {
+interface HomePageProps {
+  initialData: HomeInitialData;
+}
+
+export const Home = ({ initialData }: HomePageProps) => {
   return (
     <div className="home">
       <Header />

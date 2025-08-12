@@ -8,7 +8,7 @@ hydrateRoot(
   document.getElementById('root') as HTMLElement,
   <StrictMode>
     <BrowserRouter>
-      <Router initialData={(window as any).__INITIAL_DATA__} />
+      <Router initialData={window.__INITIAL_DATA__} />
     </BrowserRouter>
   </StrictMode>,
 );
