@@ -24,6 +24,9 @@
     "sirv": "^3.0.1"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.6.4",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/express": "^5.0.3",
     "@types/node": "^24.1.0",
     "@types/react": "^19.1.9",
@@ -41,6 +44,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "prettier": "^3.6.2",
     "typescript": "^5.9.2",
-    "vite": "^7.0.6"
+    "vite": "^7.0.6",
+    "vitest": "^3.2.4"
   }
 }
