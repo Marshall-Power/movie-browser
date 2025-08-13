@@ -5,6 +5,7 @@
     "module": "esnext",
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
+    "types": ["vitest/globals", "vite/client"],
 
     /* Bundler mode */
     "moduleResolution": "bundler",
