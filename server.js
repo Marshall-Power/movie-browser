@@ -40,8 +40,8 @@ if (!isProduction) {
 
 async function tmdb(path) {
   const res = await fetch(`https://api.themoviedb.org/3${path}`, {
+    method: 'GET',
     headers: {
-      method: 'GET',
       accept: 'application/json',
       Authorization: `Bearer ${process.env.TMDB_API_TOKEN}`,
     },
