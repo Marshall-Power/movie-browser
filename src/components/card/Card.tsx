@@ -21,7 +21,6 @@ export const Card: React.FC<CardProps> = ({
   const [loaded, setLoaded] = React.useState(false);
   const [errored, setErrored] = React.useState(false);
 
-  // Reset state whenever imageUrl changes
   React.useEffect(() => {
     setLoaded(false);
     setErrored(false);
@@ -35,12 +34,6 @@ export const Card: React.FC<CardProps> = ({
       onClick={handleClick}
       role="button"
       tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          handleClick();
-        }
-      }}
       aria-label={`View details for ${title}`}
     >
       <div
