@@ -13,7 +13,7 @@ export interface TMDBPaginatedResponse<T> {
 
 export interface TMDBCategoryData {
   name: string;
-  items: TMDBMovie[];
+  movies: TMDBMovie[];
 }
 
 

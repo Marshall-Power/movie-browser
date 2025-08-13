@@ -1,5 +1,5 @@
-import { Header, Carousel } from '../../components';
-import { HomeInitialData } from '../../types';
+import { Header, Carousel, Card } from '../../components';
+import { HomeInitialData, TMDBCategoryData, TMDBMovie } from '../../types';
 
 interface HomePageProps {
   initialData: HomeInitialData;
@@ -10,8 +10,17 @@ export const Home = ({ initialData }: HomePageProps) => {
     <div className="home">
       <Header />
       <div className="home__content">
-        {initialData.map((element: any) => {
-          return <Carousel key={element.name} name={element.name} items={element.movies} />;
+        {initialData.map(({ name, movies }: TMDBCategoryData) => {
+          return (
+            <Carousel
+              name={name}
+              items={movies}
+              getKey={(m) => m.id}
+              renderItem={({ id, title, imageUrl }: TMDBMovie) => (
+                <Card id={id} title={title} imageUrl={imageUrl} href={`/movie/${id}`} />
+              )}
+            />
+          );
         })}
       </div>
     </div>

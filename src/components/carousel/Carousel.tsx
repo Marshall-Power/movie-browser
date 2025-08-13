@@ -1,16 +1,24 @@
 import { useCallback } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
-import { Card, Button } from '../../components';
-import { TMDBCategoryData, TMDBMovie } from '../../types';
+import { Button } from '../../components';
+import { TMDBMovie } from '../../types';
 
-export function Carousel({ name, items }: TMDBCategoryData) {
+type CarouselProps<T> = {
+  name: string;
+  items: T[];
+  getKey: (item: T, index: number) => React.Key;
+  renderItem: (item: T, index: number) => React.ReactNode;
+  className?: string;
+};
+
+export function Carousel({
+  name,
+  items,
+  getKey,
+  renderItem,
+  className = '',
+}: CarouselProps<TMDBMovie>) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false, dragFree: true });
-
-  // useEffect(() => {
-  //   if (emblaApi) {
-  //     console.log(emblaApi.slideNodes()); // Access API
-  //   }
-  // }, [emblaApi]);
 
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
@@ -20,13 +28,13 @@ export function Carousel({ name, items }: TMDBCategoryData) {
   }, [emblaApi]);
 
   return (
-    <div className="embla">
+    <div className={`embla ${className}`}>
       <h2 className="embla__title">{name}</h2>
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
-          {items.map(({ id, title, imageUrl }: TMDBMovie) => (
-            <div key={id} className="embla__slide">
-              <Card id={id} title={title} imageUrl={imageUrl} href={`movie/${id}`} />
+          {items.map((item, i) => (
+            <div key={getKey(item, i)} className="embla__slide">
+              {renderItem(item, i)}
             </div>
           ))}
         </div>
