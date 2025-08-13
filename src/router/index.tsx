@@ -1,16 +1,17 @@
-import { Route, Routes } from 'react-router-dom';
 import { Home, MoviePage } from '../pages';
-import { HomeInitialData } from '../types';
+import { MovieDetails } from '../types'; 
 
-interface RouterProps {
-  initialData: HomeInitialData;
+type InitialData =
+  | { kind: 'home'; payload: { categories: Array<{ name: string; movies: any[] }> } }
+  | { kind: 'movie'; payload: { movie: MovieDetails } };
+
+export function Router({ initialData }: { url: string; initialData: InitialData }) {
+  if (initialData.kind === 'home') {
+    return <Home initialData={initialData.payload.categories} />;
+  }
+  if (initialData.kind === 'movie') {
+    const { movie } = initialData.payload;
+    return <MoviePage {...movie} />;
+  }
+  return null;
 }
-
-export const Router = ({ initialData }: RouterProps) => {
-  return (
-    <Routes>
-      <Route index path="/" element={<Home initialData={initialData} />} />
-      <Route path="movie/:id" element={<MoviePage />} />
-    </Routes>
-  );
-};

@@ -1,21 +1,10 @@
-import { StrictMode } from 'react';
+
 import { renderToString } from 'react-dom/server';
-import { StaticRouter } from 'react-router-dom';
 import { Router } from './router';
-import type { HomeInitialData } from './types';
 
-interface RenderPropType {
-  _url: string;
-  initialData: HomeInitialData;
-}
-
-export function render({ _url, initialData }: RenderPropType) {
-  const html = renderToString(
-    <StrictMode>
-      <StaticRouter location={_url}>
-        <Router initialData={initialData} />
-      </StaticRouter>
-    </StrictMode>,
-  );
-  return { html, initialData };
+export async function render({ url, initialData }: { url: string; initialData: any }) {
+  const app = <Router url={url} initialData={initialData} />;
+  const html = renderToString(app);
+  const head = ''; // add meta later if you want
+  return { html, head };
 }
