@@ -13,6 +13,7 @@ export const Home = ({ initialData }: HomePageProps) => {
         {initialData.map(({ name, movies }: TMDBCategoryData) => {
           return (
             <Carousel
+              key={name}
               name={name}
               items={movies}
               getKey={(m) => m.id}

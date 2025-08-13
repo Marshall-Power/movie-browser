@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { Header } from '../../components';
 
-export function Movie() {
+export function MoviePage() {
   const { id } = useParams();
   return (
     <>

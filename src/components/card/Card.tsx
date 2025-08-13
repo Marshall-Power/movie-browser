@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 interface CardProps {
   id: number;
@@ -71,5 +70,5 @@ export const Card: React.FC<CardProps> = ({
     </div>
   );
 
-  return href ? <Link to={href}> {content}</Link> : content;
+  return href ? <a href={href}> {content}</a> : content;
 };

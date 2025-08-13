@@ -1,2 +1,2 @@
 export { Home } from "./home/Home"
-export { Movie } from "./movie/Movie"
+export { MoviePage } from "./movie/MoviePage"
