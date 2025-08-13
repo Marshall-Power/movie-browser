@@ -16,6 +16,16 @@ function readTheme(req) {
   return m?.[1] || 'dark'; // default
 }
 
+function genreToThemeKey(genres) {
+  const g = (genres?.[0]?.name || '').toLowerCase();
+  if (/(action|adventure|war)/.test(g)) return 'action';
+  if (/(comedy|family|animation)/.test(g)) return 'comedy';
+  if (/(drama|romance|history|music)/.test(g)) return 'drama';
+  if (/(horror|thriller|crime)/.test(g)) return 'horror';
+  if (/(science fiction|sci[-\s]?fi|fantasy)/.test(g)) return 'scifi';
+  return 'default';
+}
+
 const templateHtml = isProduction ? await fs.readFile('./dist/client/index.html', 'utf-8') : '';
 
 const app = express();
@@ -54,10 +64,10 @@ const TMDB_BASE_IMAGE = 'https://image.tmdb.org/t/p/w500';
 function mapTMDBHomeData(home) {
   return Object.entries(home).map(([name, data]) => ({
     name,
-    movies: (data?.results ?? []).map((m) => ({
-      id: m.id,
-      title: m.title ?? m.name ?? '',
-      imageUrl: m.poster_path ? `${TMDB_BASE_IMAGE}${m.poster_path}` : '',
+    movies: (data?.results ?? []).map(({ id, title, name, poster_path }) => ({
+      id: id,
+      title: title ?? name ?? '',
+      imageUrl: poster_path ? `${TMDB_BASE_IMAGE}${poster_path}` : '',
     })),
   }));
 }
@@ -85,7 +95,8 @@ app.get(/^(?!\/api\/).*/, async (req, res) => {
     } else if (movieMatch) {
       const id = movieMatch[1];
       const movie = await Promise.resolve(tmdb(`/movie/${id}?language=en-US`));
-      initialData = { kind: 'movie', payload: { movie } };
+      const themeKey = genreToThemeKey(movie.genres);
+      initialData = { kind: 'movie', payload: { movie, themeKey } };
     } else {
       res.redirect(302, '/');
       return;
