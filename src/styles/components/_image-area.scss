@@ -1,0 +1,25 @@
+.image-area {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--img-skeleton, #111);
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9; /* landscape */
+    object-fit: cover; /* crop portrait posters nicely */
+  }
+
+  &__placeholder {
+    width: 100%;
+    aspect-ratio: 16 / 9; /* match img for layout stability */
+    display: grid;
+    place-items: center;
+    background: var(--img-placeholder-bg, #1f1f1f);
+    color: var(--img-placeholder-fg, #888);
+    border: 1px dashed rgba(255, 255, 255, 0.15);
+    font-size: 0.9rem;
+  }
+}

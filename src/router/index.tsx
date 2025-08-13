@@ -11,7 +11,6 @@ export function Router({ initialData }: { url: string; initialData: InitialData 
   }
   if (initialData.kind === 'movie') {
     const { movie, themeKey } = initialData.payload;
-    console.log(themeKey);
     return <MoviePage movie={movie} themeKey={themeKey} />;
   }
   return null;
