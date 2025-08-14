@@ -2,7 +2,7 @@ import './styles/main.scss';
 import { StrictMode } from 'react';
 import { hydrateRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import { Router } from './router';
+import { Router } from './router/Router';
 import { WishlistProvider } from './store';
 
 const initialData = window.__INITIAL_DATA__;

@@ -1,7 +1,7 @@
 import { renderToString } from 'react-dom/server';
-import { Router } from './router';
+import { Router } from './router/Router';
 import { WishlistProvider } from './store';
-import { MovieDetails, TMDBCategoryData } from './types'
+import { MovieDetails, TMDBCategoryData } from './types';
 
 type InitialDataProps =
   | {
