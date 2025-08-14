@@ -8,6 +8,7 @@
 }
 .embla__container {
   display: flex;
+  will-change: transform;
 }
 .embla__slide {
   flex: 0 0 100%;

@@ -59,7 +59,7 @@ async function tmdb(pathAndQuery) {
   return res.json();
 }
 
-const TMDB_BASE_IMAGE = 'https://image.tmdb.org/t/p/w500';
+const TMDB_BASE_IMAGE = 'https://image.tmdb.org/t/p/w342';
 
 function mapTMDBHomeData(home) {
   return Object.entries(home).map(([name, data]) => ({

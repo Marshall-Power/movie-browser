@@ -11,7 +11,7 @@ type CarouselProps<T> = {
 };
 
 export function Carousel({ name, items, getKey, renderItem, className = '' }: CarouselProps<any>) {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false, dragFree: true });
+  const [emblaRef, emblaApi] = useEmblaCarousel({ align: 'start', loop: false, dragFree: true });
 
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
