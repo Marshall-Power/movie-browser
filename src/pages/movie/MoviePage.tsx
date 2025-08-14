@@ -1,4 +1,4 @@
-import { Header, ImageArea } from '../../components';
+import { Header, ImageArea, DescriptionArea } from '../../components';
 import { MovieDetails } from '../../types';
 
 interface MoviePageProps {
@@ -26,7 +26,7 @@ export function MoviePage({ themeKey, movie }: MoviePageProps) {
           </div>
 
           <div className="movie-detail__description">
-            
+            <DescriptionArea movie={movie} themeKey={themeKey} />
           </div>
         </div>
 

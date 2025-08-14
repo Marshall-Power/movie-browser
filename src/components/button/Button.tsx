@@ -4,11 +4,12 @@ interface ButtonPropsType {
   className?: string;
   children: string;
   onClick: () => void;
+  disabled?: boolean;
 }
 
 export const Button: React.FC<ButtonPropsType> = ({ className = '', children, onClick }) => {
   return (
-    <button role="button" className={`${className}`.trim()} onClick={onClick}>
+    <button type="button" role="button" className={`${className}`.trim()} onClick={onClick}>
       {children}
     </button>
   );

@@ -1,0 +1,60 @@
+.description-area {
+  font-family: var(--font-family, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif);
+  color: var(--fg, inherit);
+
+  &__title {
+    font-size: clamp(1.4rem, 1.2rem + 1.2vw, 2.2rem);
+    line-height: 1.15;
+    margin: 0 0 0.5rem;
+    font-weight: 700;
+  }
+
+  &__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    margin: 0 0 1rem;
+    padding: 0;
+    list-style: none;
+    color: var(--muted, #999);
+
+    li {
+      position: relative;
+    }
+    li + li::before {
+      content: '•';
+      margin-right: 0.75rem;
+      color: var(--muted, #999);
+    }
+  }
+
+  &__overview {
+    margin: 0 0 1rem;
+    line-height: 1.6;
+  }
+
+  .btn--wishlist {
+    margin-top: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-radius: var(--btn-radius, 10px);
+    border: 1px solid var(--btn-border, transparent);
+    background: var(--btn-bg, #2b6cb0);
+    color: var(--btn-text, #fff);
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+      transform 0.05s ease,
+      opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.95;
+    }
+    &:active {
+      transform: translateY(1px);
+    }
+    &[aria-pressed='true'] {
+      background: var(--btn-bg-active, #355d9b);
+      border-color: var(--btn-border-active, rgba(255, 255, 255, 0.15));
+    }
+  }
+}
