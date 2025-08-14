@@ -10,13 +10,14 @@ type CarouselProps<T> = {
   className?: string;
 };
 
-export const Carousel = ({
+//Trailing comma needed so TS doesn't parse <T> as JSX
+export const Carousel = <T,>({
   name,
   items,
   getKey,
   renderItem,
   className = '',
-}: CarouselProps<any>) => {
+}: CarouselProps<T>) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ align: 'start', loop: false, dragFree: true });
 
   const scrollPrev = useCallback(() => {

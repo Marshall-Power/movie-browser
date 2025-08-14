@@ -1,6 +1,22 @@
 import { renderToString } from 'react-dom/server';
 import { Router } from './router';
 import { WishlistProvider } from './store';
+import { MovieDetails, TMDBCategoryData } from './types'
+
+type InitialDataProps =
+  | {
+      kind: 'home';
+      payload: {
+        categories: TMDBCategoryData[];
+      };
+    }
+  | {
+      kind: 'movie';
+      payload: {
+        movie: MovieDetails;
+        themeKey: string;
+      };
+    };
 
 function headForTheme(themeKey?: string) {
   if (themeKey === 'default') {
@@ -10,7 +26,7 @@ function headForTheme(themeKey?: string) {
   return '';
 }
 
-export async function render({ url, initialData }: { url: string; initialData: any }) {
+export async function render({ url, initialData }: { url: string; initialData: InitialDataProps }) {
   const app = (
     <WishlistProvider>
       <Router url={url} initialData={initialData} />
