@@ -1,6 +1,6 @@
 import { useState, useRef, useLayoutEffect, RefObject } from 'react';
 
-export function useContainerWidth<T extends HTMLElement>(): [RefObject<T | null>, number] {
+export const useContainerWidth = <T extends HTMLElement>(): [RefObject<T | null>, number] => {
   const ref = useRef<T | null>(null);
   const [width, setWidth] = useState(0);
 

@@ -19,7 +19,7 @@ const STORAGE_KEY = 'wishlist:v1';
 
 const initialState: State = { items: [] };
 
-function reducer(state: State, action: Action): State {
+const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case 'INIT':
       return { items: Array.isArray(action.payload) ? action.payload : [] };
@@ -35,7 +35,7 @@ function reducer(state: State, action: Action): State {
     default:
       return state;
   }
-}
+};
 
 type Ctx = {
   items: WishlistItem[];
@@ -47,7 +47,7 @@ type Ctx = {
 
 const WishlistContext = createContext<Ctx | null>(null);
 
-export function WishlistProvider({ children }: { children: React.ReactNode }) {
+export const WishlistProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
@@ -78,10 +78,10 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
   );
 
   return <WishlistContext.Provider value={api}>{children}</WishlistContext.Provider>;
-}
+};
 
-export function useWishlist(): Ctx {
+export const useWishlist = (): Ctx => {
   const ctx = useContext(WishlistContext);
   if (!ctx) throw new Error('useWishlist must be used within WishlistProvider');
   return ctx;
-}
+};

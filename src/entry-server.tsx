@@ -18,13 +18,13 @@ type InitialDataProps =
       };
     };
 
-function headForTheme(themeKey?: string) {
+const headForTheme = (themeKey?: string) => {
   if (themeKey === 'default') {
     return `<link rel="preload" href="/fonts/inter/Inter-Regular.woff2"
                   as="font" type="font/woff2" crossorigin>`;
   }
   return '';
-}
+};
 
 export async function render({ url, initialData }: { url: string; initialData: InitialDataProps }) {
   const app = (
