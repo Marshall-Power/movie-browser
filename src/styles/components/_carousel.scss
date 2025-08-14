@@ -42,6 +42,10 @@
     text-align: center;
     touch-action: manipulation;
     vertical-align: middle;
+
+    &:active {
+      transform: scale(0.95);
+    }
   }
 }
 

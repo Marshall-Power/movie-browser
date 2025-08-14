@@ -10,7 +10,13 @@ type CarouselProps<T> = {
   className?: string;
 };
 
-export function Carousel({ name, items, getKey, renderItem, className = '' }: CarouselProps<any>) {
+export const Carousel = ({
+  name,
+  items,
+  getKey,
+  renderItem,
+  className = '',
+}: CarouselProps<any>) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ align: 'start', loop: false, dragFree: true });
 
   const scrollPrev = useCallback(() => {
@@ -48,4 +54,4 @@ export function Carousel({ name, items, getKey, renderItem, className = '' }: Ca
       </div>
     </div>
   );
-}
+};
