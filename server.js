@@ -13,7 +13,7 @@ const safeSerialize = (data) =>
 function readTheme(req) {
   const cookie = req.headers.cookie || '';
   const m = cookie.match(/(?:^|;\s*)theme=(light|dark)/);
-  return m?.[1] || 'dark'; // default
+  return m?.[1] || 'dark'; 
 }
 
 function genreToThemeKey(genres) {
