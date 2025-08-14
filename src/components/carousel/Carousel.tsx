@@ -1,23 +1,16 @@
 import { useCallback } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import { Button } from '../../components';
-import { TMDBMovie } from '../../types';
 
 type CarouselProps<T> = {
-  name: string;
   items: T[];
   getKey: (item: T, index: number) => React.Key;
   renderItem: (item: T, index: number) => React.ReactNode;
+  name?: string;
   className?: string;
 };
 
-export function Carousel({
-  name,
-  items,
-  getKey,
-  renderItem,
-  className = '',
-}: CarouselProps<TMDBMovie>) {
+export function Carousel({ name, items, getKey, renderItem, className = '' }: CarouselProps<any>) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false, dragFree: true });
 
   const scrollPrev = useCallback(() => {

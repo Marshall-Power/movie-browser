@@ -1,5 +1,6 @@
-import { Header, ImageArea, DescriptionArea } from '../../components';
+import { Header, ImageArea, DescriptionArea, Carousel, Card } from '../../components';
 import { MovieDetails } from '../../types';
+import { useWishlist } from '../../store';
 
 interface MoviePageProps {
   themeKey: string;
@@ -8,8 +9,10 @@ interface MoviePageProps {
 
 export function MoviePage({ themeKey, movie }: MoviePageProps) {
   if (!movie) return null;
+  const { id, title, poster_path, backdrop_path } = movie;
+  const currentId = id;
   console.log(movie);
-  const { title, poster_path, backdrop_path } = movie;
+  const { items } = useWishlist();
 
   return (
     <>
@@ -31,9 +34,18 @@ export function MoviePage({ themeKey, movie }: MoviePageProps) {
         </div>
 
         <section className="movie-detail__additional" aria-labelledby="additional-heading">
-          <h2 id="additional-heading" className="visually-hidden">
-            Additional information
-          </h2>
+          <h2 id="additional-heading">Wishlist</h2>
+
+          <Carousel
+            key={title}
+            items={items}
+            getKey={(m) => m.id}
+            renderItem={({ id, title, name, imageUrl }) => {
+              const href = id === currentId ? undefined : `/movie/${id}`;
+              const cardTitle = title ?? name ?? '';
+              return <Card id={id} title={cardTitle} imageUrl={imageUrl} href={href} />;
+            }}
+          />
         </section>
       </main>
     </>

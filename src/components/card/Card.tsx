@@ -3,7 +3,7 @@ import React from 'react';
 interface CardProps {
   id: number;
   title: string;
-  imageUrl: string;
+  imageUrl: string | undefined;
   onClick?: (id: number) => void;
   className?: string;
   href?: string;
