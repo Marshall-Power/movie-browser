@@ -9,7 +9,7 @@ interface MoviePageProps {
 
 export function MoviePage({ themeKey, movie }: MoviePageProps) {
   if (!movie) return null;
-  const { id, title, poster_path, backdrop_path } = movie;
+  const { id, title, poster_path, backdrop_path, size } = movie;
   const currentId = id;
   const { items } = useWishlist();
 
@@ -23,7 +23,7 @@ export function MoviePage({ themeKey, movie }: MoviePageProps) {
               title={title}
               posterPath={poster_path}
               backdropPath={backdrop_path}
-              size="w780"
+              size={size}
             />
           </div>
 
@@ -34,15 +34,13 @@ export function MoviePage({ themeKey, movie }: MoviePageProps) {
 
         <section className="movie-detail__additional" aria-labelledby="additional-heading">
           <h2 id="additional-heading">Wishlist</h2>
-
           <Carousel
             key={title}
             items={items}
             getKey={(m) => m.id}
-            renderItem={({ id, title, name, imageUrl }) => {
+            renderItem={({ id, title, imageUrl }) => {
               const href = id === currentId ? undefined : `/movie/${id}`;
-              const cardTitle = title ?? name ?? '';
-              return <Card id={id} title={cardTitle} imageUrl={imageUrl} href={href} />;
+              return <Card id={id} title={title} imageUrl={imageUrl} href={href} />;
             }}
           />
         </section>

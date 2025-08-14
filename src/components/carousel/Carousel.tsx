@@ -10,7 +10,6 @@ type CarouselProps<T> = {
   className?: string;
 };
 
-//Trailing comma needed so TS doesn't parse <T> as JSX
 export const Carousel = <T,>({
   name,
   items,
