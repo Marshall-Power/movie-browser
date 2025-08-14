@@ -1,0 +1,9 @@
+// themes/_genre-themes.scss
+@use 'sass:map';
+@use '../abstracts/themes' as t;
+
+@each $name, $tokens in t.$themes {
+  .theme--#{$name} {
+    @include t.theme-vars($tokens);
+  }
+}

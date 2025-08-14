@@ -1,0 +1,115 @@
+@use 'sass:map';
+
+$font-system:
+  'Inter',
+  system-ui,
+  -apple-system,
+  Segoe UI,
+  Roboto,
+  Arial,
+  sans-serif;
+$font-serif: Georgia, 'Times New Roman', serif;
+$font-condensed: 'Arial Narrow', 'Inter', system-ui, sans-serif;
+$font-rounded: 'Trebuchet MS', 'Inter', system-ui, sans-serif;
+$font-tech: 'Segoe UI', 'Inter', system-ui, sans-serif;
+
+$themes: (
+  default: (
+    font: $font-system,
+    accent: #2563eb,
+    muted: #9ca3af,
+    btn-bg: #2563eb,
+    btn-text: #ffffff,
+    btn-border: transparent,
+    btn-radius: 10px,
+    chip-bg: rgba(0, 0, 0, 0.5),
+    img-skeleton: #111111,
+    img-ph-bg: #1f1f1f,
+    img-ph-fg: #888888,
+  ),
+  action: (
+    font: $font-condensed,
+    accent: #ef4444,
+    muted: #9ca3af,
+    btn-bg: #dc2626,
+    btn-text: #ffffff,
+    btn-border: rgba(255, 255, 255, 0.12),
+    btn-radius: 8px,
+    chip-bg: rgba(220, 38, 38, 0.18),
+    img-skeleton: #150a0a,
+    img-ph-bg: #2a0f0f,
+    img-ph-fg: #fca5a5,
+    page-tint: rgba(239, 68, 68, 0.1),
+  ),
+  comedy: (
+    font: $font-rounded,
+    accent: #f59e0b,
+    muted: #9ca3af,
+    btn-bg: #fbbf24,
+    btn-text: #1f2937,
+    btn-border: rgba(0, 0, 0, 0.08),
+    btn-radius: 9999px,
+    chip-bg: rgba(251, 191, 36, 0.22),
+    img-skeleton: #1a1405,
+    img-ph-bg: #2a1f07,
+    img-ph-fg: #fcd34d,
+    page-tint: rgba(245, 158, 11, 0.1),
+  ),
+  drama: (
+    font: $font-serif,
+    accent: #4f46e5,
+    muted: #9ca3af,
+    btn-bg: #4338ca,
+    btn-text: #ffffff,
+    btn-border: rgba(255, 255, 255, 0.12),
+    btn-radius: 12px,
+    chip-bg: rgba(79, 70, 229, 0.18),
+    img-skeleton: #0f1020,
+    img-ph-bg: #171836,
+    img-ph-fg: #c7d2fe,
+    page-tint: rgba(79, 70, 229, 0.1),
+  ),
+  horror: (
+    font: $font-condensed,
+    accent: #b91c1c,
+    muted: #9ca3af,
+    btn-bg: #7f1d1d,
+    btn-text: #ffffff,
+    btn-border: rgba(255, 255, 255, 0.15),
+    btn-radius: 10px,
+    chip-bg: rgba(185, 28, 28, 0.22),
+    img-skeleton: #100a0a,
+    img-ph-bg: #1b0f10,
+    img-ph-fg: #fca5a5,
+    page-tint: rgba(185, 28, 28, 0.1),
+  ),
+  scifi: (
+    font: $font-tech,
+    accent: #06b6d4,
+    muted: #94a3b8,
+    btn-bg: #0891b2,
+    btn-text: #e6f9ff,
+    btn-border: rgba(255, 255, 255, 0.12),
+    btn-radius: 10px,
+    chip-bg: rgba(6, 182, 212, 0.2),
+    img-skeleton: #071316,
+    img-ph-bg: #0a1f24,
+    img-ph-fg: #67e8f9,
+    page-tint: rgba(6, 182, 212, 0.1),
+  ),
+);
+
+@mixin theme-vars($t) {
+  --font-family: #{map.get($t, font)};
+  --accent: #{map.get($t, accent)};
+  --muted: #{map.get($t, muted)};
+  --btn-bg: #{map.get($t, btn-bg)};
+  --btn-text: #{map.get($t, btn-text)};
+  --btn-border: #{map.get($t, btn-border)};
+  --btn-radius: #{map.get($t, btn-radius)};
+  --chip-bg: #{map.get($t, chip-bg)};
+  --img-skeleton: #{map.get($t, img-skeleton)};
+  --img-placeholder-bg: #{map.get($t, img-ph-bg)};
+  --img-placeholder-fg: #{map.get($t, img-ph-fg)};
+  --page-tint: #{map.get($t, page-tint)};
+}

@@ -1,4 +1,6 @@
 .movie-detail {
+  font-family: var(--font-family);
+  background: linear-gradient(0deg, var(--page-tint, transparent), var(--page-tint, transparent));
   max-width: 1280px;
   margin-inline: auto;
   padding-inline: clamp(16px, 4vw, 32px);

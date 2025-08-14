@@ -11,7 +11,6 @@ export function MoviePage({ themeKey, movie }: MoviePageProps) {
   if (!movie) return null;
   const { id, title, poster_path, backdrop_path } = movie;
   const currentId = id;
-  console.log(movie);
   const { items } = useWishlist();
 
   return (
