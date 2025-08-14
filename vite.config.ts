@@ -10,5 +10,12 @@ export default defineConfig({
     environmentMatchGlobs: [
       ['**/*.test.tsx', 'jsdom'],
     ],
+    coverage: {
+      provider: 'v8',                
+      reporter: [['text', { skipFull: false }]], 
+      reportsDirectory: 'coverage',  
+      clean: true,
+      cleanOnRerun: true,
+    },
   },
 })

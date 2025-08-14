@@ -5,7 +5,7 @@ import { useWishlist } from '../../store';
 
 interface MoviePageProps {
   themeKey: string;
-  movie: MovieDetails;
+  movie?: MovieDetails;
 }
 
 export function MoviePage({ themeKey, movie }: MoviePageProps) {

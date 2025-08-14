@@ -1,8 +1,8 @@
 import { render, screen, within } from '@testing-library/react';
 import '@testing-library/jest-dom/vitest';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+import React from 'react';
 import { MoviePage } from './MoviePage';
-
 
 vi.mock('../../store', () => ({
   useWishlist: () => ({
@@ -13,12 +13,21 @@ vi.mock('../../store', () => ({
   }),
 }));
 
+// NEW: mock the hook so size === 'w780' and ref is safe to attach
+const mockCallbackRef = vi.fn();
+vi.mock('../../hooks', () => ({
+  useTMDBImageSize: <T,>() =>
+    [mockCallbackRef as unknown as React.RefCallback<T>, 'w780'] as const,
+}));
+
 vi.mock('../../components', () => {
   return {
     Header: () => <div data-testid="header" />,
-    ImageArea: (props: any) => <div data-testid="image-area" data-props={JSON.stringify(props)} />,
+    ImageArea: (props: any) => (
+      <div data-testid="image-area" data-props={JSON.stringify(props)} />
+    ),
     DescriptionArea: () => <div data-testid="description-area" />,
-    
+
     Carousel: ({ items, getKey, renderItem }: any) => (
       <div data-testid="carousel">
         {items.map((it: any, i: number) => (
@@ -28,6 +37,7 @@ vi.mock('../../components', () => {
         ))}
       </div>
     ),
+
     Card: ({ id, title, imageUrl, href, ariaCurrent }: any) =>
       href ? (
         <a data-testid={`card-${id}`} href={href} aria-current={ariaCurrent}>
@@ -56,6 +66,11 @@ describe('MoviePage', () => {
     vi.clearAllMocks();
   });
 
+  it('returns null when movie is missing', () => {
+    const { container } = render(<MoviePage themeKey="scifi" movie={undefined} />);
+    expect(container.firstChild).toBeNull();
+  });
+
   it('renders header, image area, and description area with theme class', () => {
     render(<MoviePage themeKey="scifi" movie={baseMovie} />);
 
@@ -67,7 +82,7 @@ describe('MoviePage', () => {
     expect(main).toHaveClass('movie-detail', 'theme--scifi');
   });
 
-  it('passes poster/backdrop/title to ImageArea', () => {
+  it('passes poster/backdrop/title and size (from hook) to ImageArea', () => {
     render(<MoviePage themeKey="scifi" movie={baseMovie} />);
 
     const imgArea = screen.getByTestId('image-area');
@@ -84,18 +99,16 @@ describe('MoviePage', () => {
 
     const carousel = screen.getByTestId('carousel');
     const items = within(carousel).getAllByTestId('carousel-item');
-    expect(items).toHaveLength(2); 
+    expect(items).toHaveLength(2);
   });
 
-  it('omits href for the current movie in the carousel and keeps href for others', () => {
+  it('omits href for the current movie and keeps href for others', () => {
     render(<MoviePage themeKey="scifi" movie={baseMovie} />);
 
-    
     const currentCard = screen.getByTestId('card-1');
     expect(currentCard.tagName.toLowerCase()).toBe('div');
     expect(currentCard).not.toHaveAttribute('href');
 
-   
     const otherCard = screen.getByTestId('card-2');
     expect(otherCard.tagName.toLowerCase()).toBe('a');
     expect(otherCard).toHaveAttribute('href', '/movie/2');
