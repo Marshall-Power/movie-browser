@@ -3,6 +3,7 @@ import '@testing-library/jest-dom/vitest';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import React from 'react';
 import { MoviePage } from './MoviePage';
+import { MovieDetails } from '../../types';
 
 vi.mock('../../store', () => ({
   useWishlist: () => ({
@@ -16,16 +17,13 @@ vi.mock('../../store', () => ({
 // NEW: mock the hook so size === 'w780' and ref is safe to attach
 const mockCallbackRef = vi.fn();
 vi.mock('../../hooks', () => ({
-  useTMDBImageSize: <T,>() =>
-    [mockCallbackRef as unknown as React.RefCallback<T>, 'w780'] as const,
+  useTMDBImageSize: <T,>() => [mockCallbackRef as unknown as React.RefCallback<T>, 'w780'] as const,
 }));
 
 vi.mock('../../components', () => {
   return {
     Header: () => <div data-testid="header" />,
-    ImageArea: (props: any) => (
-      <div data-testid="image-area" data-props={JSON.stringify(props)} />
-    ),
+    ImageArea: (props: any) => <div data-testid="image-area" data-props={JSON.stringify(props)} />,
     DescriptionArea: () => <div data-testid="description-area" />,
 
     Carousel: ({ items, getKey, renderItem }: any) => (
@@ -59,7 +57,7 @@ const baseMovie = {
   release_date: '2017-10-06',
   runtime: 163,
   genres: [{ name: 'Science Fiction' }],
-} as any;
+};
 
 describe('MoviePage', () => {
   beforeEach(() => {
@@ -72,7 +70,7 @@ describe('MoviePage', () => {
   });
 
   it('renders header, image area, and description area with theme class', () => {
-    render(<MoviePage themeKey="scifi" movie={baseMovie} />);
+    render(<MoviePage themeKey="scifi" movie={baseMovie as MovieDetails} />);
 
     expect(screen.getByTestId('header')).toBeInTheDocument();
     expect(screen.getByTestId('image-area')).toBeInTheDocument();
@@ -83,7 +81,7 @@ describe('MoviePage', () => {
   });
 
   it('passes poster/backdrop/title and size (from hook) to ImageArea', () => {
-    render(<MoviePage themeKey="scifi" movie={baseMovie} />);
+    render(<MoviePage themeKey="scifi" movie={baseMovie as MovieDetails} />);
 
     const imgArea = screen.getByTestId('image-area');
     const props = JSON.parse(imgArea.getAttribute('data-props') || '{}');
@@ -95,7 +93,7 @@ describe('MoviePage', () => {
   });
 
   it('renders wishlist carousel items from the store', () => {
-    render(<MoviePage themeKey="scifi" movie={baseMovie} />);
+    render(<MoviePage themeKey="scifi" movie={baseMovie as MovieDetails} />);
 
     const carousel = screen.getByTestId('carousel');
     const items = within(carousel).getAllByTestId('carousel-item');
@@ -103,7 +101,7 @@ describe('MoviePage', () => {
   });
 
   it('omits href for the current movie and keeps href for others', () => {
-    render(<MoviePage themeKey="scifi" movie={baseMovie} />);
+    render(<MoviePage themeKey="scifi" movie={baseMovie as MovieDetails} />);
 
     const currentCard = screen.getByTestId('card-1');
     expect(currentCard.tagName.toLowerCase()).toBe('div');

@@ -1,1 +1,1 @@
-export { WishlistProvider, useWishlist } from './wishlist';
+export { WishlistProvider, useWishlist } from './wishlist/wishlist';
