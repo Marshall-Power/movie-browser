@@ -30,22 +30,24 @@ export const MoviePage = ({ themeKey, movie }: MoviePageProps) => {
           </div>
 
           <div className="movie-detail__description">
-            <DescriptionArea movie={movie} themeKey={themeKey} />
+            <DescriptionArea movie={movie} />
           </div>
         </div>
 
-        <section className="movie-detail__additional" aria-labelledby="additional-heading">
-          <h2 id="additional-heading">Wishlist</h2>
-          <Carousel
-            key={title}
-            items={items}
-            getKey={(m) => m.id}
-            renderItem={({ id, title, imageUrl }) => {
-              const href = id === currentId ? undefined : `/movie/${id}`;
-              return <Card id={id} title={title} imageUrl={imageUrl} href={href} />;
-            }}
-          />
-        </section>
+        {items.length ? (
+          <section className="movie-detail__additional">
+            <h2>Wishlist</h2>
+            <Carousel
+              key={title}
+              items={items}
+              getKey={(m) => m.id}
+              renderItem={({ id, title, imageUrl }) => {
+                const href = id === currentId ? undefined : `/movie/${id}`;
+                return <Card id={id} title={title} imageUrl={imageUrl} href={href} />;
+              }}
+            />
+          </section>
+        ) : null}
       </main>
     </>
   );

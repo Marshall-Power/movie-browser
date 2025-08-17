@@ -25,7 +25,7 @@ describe('DescriptionArea', () => {
 
   it('renders title, meta data and overview', () => {
     has.mockReturnValue(false);
-    render(<DescriptionArea movie={baseMovie} themeKey="action" />);
+    render(<DescriptionArea movie={baseMovie}/>);
 
     expect(screen.getByRole('heading', { name: /test movie/i })).toBeInTheDocument();
     expect(screen.getByText('2025')).toBeInTheDocument();
@@ -48,13 +48,12 @@ describe('DescriptionArea', () => {
 
   it('clicking add calls add() with correct payload', () => {
     has.mockReturnValue(false);
-    render(<DescriptionArea movie={baseMovie} themeKey="action" />);
+    render(<DescriptionArea movie={baseMovie}/>);
     fireEvent.click(screen.getByRole('button', { name: /add to wishlist/i }));
     expect(add).toHaveBeenCalledWith({
       id: 42,
       title: 'Test Movie',
       imageUrl: 'https://image.tmdb.org/t/p/w500/poster.jpg',
-      genreKey: 'action',
     });
   });
 
