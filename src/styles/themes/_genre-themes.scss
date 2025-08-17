@@ -1,4 +1,4 @@
-@use '../abstracts/themes' as t;
+@use '../utils/themes' as t;
 
 @each $name, $tokens in t.$themes {
   .theme--#{$name} {

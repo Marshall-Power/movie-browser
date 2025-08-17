@@ -25,7 +25,7 @@ describe('useWishlist', () => {
   });
 
   it('initializes from localStorage (INIT effect)', async () => {
-    const initial: WishlistItem[] = [{ id: 1, title: 'A', imageUrl: '/a.jpg', genreKey: 'action' }];
+    const initial: WishlistItem[] = [{ id: 1, title: 'A', imageUrl: '/a.jpg'}];
     localStorage.setItem(STORAGE_KEY, JSON.stringify(initial));
 
     const { result } = renderHook(() => useWishlist(), { wrapper });
@@ -40,12 +40,12 @@ describe('useWishlist', () => {
     const { result } = renderHook(() => useWishlist(), { wrapper });
 
     act(() => {
-      result.current.add({ id: 10, title: 'X', imageUrl: '/x.jpg', genreKey: 'drama' });
+      result.current.add({ id: 10, title: 'X', imageUrl: '/x.jpg'});
     });
     expect(result.current.items.map((i) => i.id)).toEqual([10]);
 
     act(() => {
-      result.current.add({ id: 10, title: 'X again', imageUrl: '/x2.jpg', genreKey: 'drama' });
+      result.current.add({ id: 10, title: 'X again', imageUrl: '/x2.jpg'});
     });
     expect(result.current.items.map((i) => i.id)).toEqual([10]); // no dup
   });
@@ -54,8 +54,8 @@ describe('useWishlist', () => {
     const { result } = renderHook(() => useWishlist(), { wrapper });
 
     act(() => {
-      result.current.add({ id: 1, title: 'A', imageUrl: '/a.jpg', genreKey: 'action' });
-      result.current.add({ id: 2, title: 'B', imageUrl: '/b.jpg', genreKey: 'scifi' });
+      result.current.add({ id: 1, title: 'A', imageUrl: '/a.jpg'});
+      result.current.add({ id: 2, title: 'B', imageUrl: '/b.jpg'});
     });
     expect(result.current.has(1)).toBe(true);
     expect(result.current.has(3)).toBe(false);
@@ -74,12 +74,12 @@ describe('useWishlist', () => {
     const { result } = renderHook(() => useWishlist(), { wrapper });
 
     act(() => {
-      result.current.add({ id: 99, title: 'Z', imageUrl: '/z.jpg', genreKey: 'thriller' });
+      result.current.add({ id: 99, title: 'Z', imageUrl: '/z.jpg'});
     });
 
     expect(setSpy).toHaveBeenCalledWith(
       STORAGE_KEY,
-      JSON.stringify([{ id: 99, title: 'Z', imageUrl: '/z.jpg', genreKey: 'thriller' }]),
+      JSON.stringify([{ id: 99, title: 'Z', imageUrl: '/z.jpg'}]),
     );
 
     act(() => {

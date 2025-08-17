@@ -12,10 +12,9 @@ type DescriptionAreaProps = {
     genres?: Array<{ name?: string }>;
     overview?: string;
   };
-  themeKey?: string;
 };
 
-export const DescriptionArea = ({ movie, themeKey = 'default' }: DescriptionAreaProps) => {
+export const DescriptionArea = ({ movie }: DescriptionAreaProps) => {
   const { add, has, remove } = useWishlist();
   const { id, title, name, poster_path, release_date, runtime } = movie;
 
@@ -35,7 +34,7 @@ export const DescriptionArea = ({ movie, themeKey = 'default' }: DescriptionArea
 
   const handleClick = () => {
     if (id == null) return;
-    const item = { id, title, imageUrl: poster, genreKey: themeKey };
+    const item = { id, title, imageUrl: poster };
     if (isAdded) remove(id);
     else add(item);
   };
