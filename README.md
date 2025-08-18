@@ -16,14 +16,14 @@ A server-side rendered movie browsing app built with **Vite**, **React**, **Type
 
 ```bash
 # 1) Clone
-git clone <your-repo-url>
-cd <your-repo>
+git clone https://github.com/Marshall-Power/movie-browser>
+cd /movie-browser>
 
 # 2) Install
 npm install
 
-# 3) Create .env
-printf "TMDB_API_TOKEN=your_tmdb_api_key_here\nPORT=5173\nBASE=/\n" > .env
+# 3) Create .env and add
+TMDB_API_TOKEN="your_tmdb_api_key_here"
 
 # 4) Run in dev
 npm run dev
