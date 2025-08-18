@@ -1,4 +1,11 @@
-import { Header, ImageArea, DescriptionArea, Carousel, Card } from '../../components';
+import {
+  Header,
+  ImageArea,
+  DescriptionArea,
+  Carousel,
+  Card,
+  AdditionalInfo,
+} from '../../components';
 import { useTMDBImageSize } from '../../hooks';
 import { MovieDetails } from '../../types';
 import { useWishlist } from '../../store';
@@ -32,6 +39,11 @@ export const MoviePage = ({ themeKey, movie }: MoviePageProps) => {
           <div className="movie-detail__description">
             <DescriptionArea movie={movie} />
           </div>
+
+          <section className="movie-detail__additional">
+            <h2>Additional Info</h2>
+            <AdditionalInfo movie={movie} />
+          </section>
 
           {items.length ? (
             <section className="movie-detail__wishlist">

@@ -1,0 +1,23 @@
+.additional-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+  }
+
+  &__row {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  &__label {
+    font-weight: 600;
+    opacity: 0.8;
+  }
+
+  &__value {
+    font-weight: 400;
+  }
+}

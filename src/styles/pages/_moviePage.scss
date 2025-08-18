@@ -12,14 +12,31 @@
     align-items: start;
   }
 
+  &__image {
+    grid-column: 1;
+  }
+
+  &__description {
+    grid-column: 2;
+  }
+
   &__wishlist {
     grid-column: 1 / span 2;
     padding: 32px 0;
   }
 
-  @media (max-width: 592px) {
+  &__additional {
+    grid-column: 1 / span 2;
+  }
+
+  @media (max-width: 900px) {
     &__grid {
       grid-template-columns: 1fr;
+    }
+
+    &__image,
+    &__description {
+      grid-column: 1;
     }
   }
 }
