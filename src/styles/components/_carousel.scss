@@ -52,17 +52,20 @@
 @media (min-width: 592px) {
   .embla__slide {
     flex: 0 0 50%;
+    min-width: 0;
   }
 }
 
 @media (min-width: 768px) {
   .embla__slide {
     flex: 0 0 20%;
+    min-width: 0;
   }
 }
 
 @media (min-width: 1024px) {
   .embla__slide {
     flex: 0 0 15%;
+    min-width: 0;
   }
 }

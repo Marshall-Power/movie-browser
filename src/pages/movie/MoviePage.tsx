@@ -35,7 +35,7 @@ export const MoviePage = ({ themeKey, movie }: MoviePageProps) => {
         </div>
 
         {items.length ? (
-          <section className="movie-detail__additional">
+          <section className="movie-detail__wishlist">
             <h2>Wishlist</h2>
             <Carousel
               key={title}
