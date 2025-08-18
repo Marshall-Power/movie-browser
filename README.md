@@ -23,17 +23,19 @@ cd <your-repo>
 npm install
 
 # 3) Create .env
-printf "TMDB_API_KEY=your_tmdb_api_key_here\nPORT=5173\nBASE=/\n" > .env
+printf "TMDB_API_TOKEN=your_tmdb_api_key_here\nPORT=5173\nBASE=/\n" > .env
 
 # 4) Run in dev
 npm run dev
 # open http://localhost:5173
 
 # 5) (Optional) Run tests
-npm test
+npm run tests
+
+# 5) (Optional) Run tests coverage
+npm run coverage
 
 # 6) Build & run in production
 npm run build
 npm run preview
-# or:
-NODE_ENV=production node server.js
+```

@@ -14,7 +14,6 @@ vi.mock('../../store', () => ({
   }),
 }));
 
-// NEW: mock the hook so size === 'w780' and ref is safe to attach
 const mockCallbackRef = vi.fn();
 vi.mock('../../hooks', () => ({
   useTMDBImageSize: <T,>() => [mockCallbackRef as unknown as React.RefCallback<T>, 'w780'] as const,
@@ -25,6 +24,9 @@ vi.mock('../../components', () => {
     Header: () => <div data-testid="header" />,
     ImageArea: (props: any) => <div data-testid="image-area" data-props={JSON.stringify(props)} />,
     DescriptionArea: () => <div data-testid="description-area" />,
+    AdditionalInfo: (props: any) => (
+      <div data-testid="additional-info" data-props={JSON.stringify(props)} />
+    ),
 
     Carousel: ({ items, getKey, renderItem }: any) => (
       <div data-testid="carousel">
@@ -57,6 +59,13 @@ const baseMovie = {
   release_date: '2017-10-06',
   runtime: 163,
   genres: [{ name: 'Science Fiction' }],
+  popularity: 123.56,
+  budget: 1000,
+  revenue: 2_500_000.5,
+  spoken_languages: [
+    { iso_639_1: 'en', name: 'English', english_name: 'English' },
+    { iso_639_1: 'es', name: 'Español', english_name: 'Spanish' },
+  ],
 };
 
 describe('MoviePage', () => {
@@ -90,6 +99,19 @@ describe('MoviePage', () => {
     expect(props.posterPath).toBe('/p.jpg');
     expect(props.backdropPath).toBe('/b.jpg');
     expect(props.size).toBe('w780');
+  });
+
+  it('renders AdditionalInfo with movie props', () => {
+    render(<MoviePage themeKey="scifi" movie={baseMovie as MovieDetails} />);
+
+    const node = screen.getByTestId('additional-info');
+    expect(node).toBeInTheDocument();
+
+    const props = JSON.parse(node.getAttribute('data-props') || '{}');
+    expect(props.movie.id).toBe(1);
+    expect(props.movie.runtime).toBe(163);
+    expect(props.movie.popularity).toBeCloseTo(123.56);
+    expect(props.movie.spoken_languages).toHaveLength(2);
   });
 
   it('renders wishlist carousel items from the store', () => {
