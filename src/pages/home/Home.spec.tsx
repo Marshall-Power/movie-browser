@@ -15,6 +15,10 @@ const mockData: HomeInitialData = [
     name: 'Top Rated',
     movies: [{ id: 3, title: 'Movie Three', imageUrl: '/three.jpg' }],
   },
+  {
+    name: 'Upcoming',
+    movies: [{ id: 4, title: 'Movie Four', imageUrl: '/four.jpg' }],
+  },
 ];
 
 vi.mock('../../components', () => ({
@@ -22,8 +26,8 @@ vi.mock('../../components', () => ({
   Carousel: ({ name, items }: any) => (
     <section>
       <h2>{name}</h2>
-      {items.map((i: any) => (
-        <div key={i.id}>{i.title}</div>
+      {items.map((item: any) => (
+        <div key={item.id}>{item.title}</div>
       ))}
     </section>
   ),
@@ -48,11 +52,13 @@ describe('Home', () => {
     renderHome();
     expect(screen.getByText(/trending/i)).toBeInTheDocument();
     expect(screen.getByText(/top rated/i)).toBeInTheDocument();
+    expect(screen.getByText(/upcoming/i)).toBeInTheDocument();
   });
 
   it('renders movies inside each carousel', () => {
     renderHome();
     expect(screen.getByText(/movie one/i)).toBeInTheDocument();
     expect(screen.getByText(/movie three/i)).toBeInTheDocument();
+    expect(screen.getByText(/movie four/i)).toBeInTheDocument();
   });
 });
