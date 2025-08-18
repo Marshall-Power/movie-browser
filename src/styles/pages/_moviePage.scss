@@ -3,9 +3,9 @@
   background: linear-gradient(0deg, var(--page-tint, transparent), var(--page-tint, transparent));
   margin-inline: auto;
   padding: 16px;
-  height: 100%;
 
   &__grid {
+    min-height: 100vh;
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: clamp(16px, 4vw, 32px);
@@ -13,6 +13,7 @@
   }
 
   &__wishlist {
+    grid-column: 1 / span 2;
     padding: 32px 0;
   }
 
