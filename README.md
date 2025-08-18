@@ -16,8 +16,8 @@ A server-side rendered movie browsing app built with **Vite**, **React**, **Type
 
 ```bash
 # 1) Clone
-git clone https://github.com/Marshall-Power/movie-browser>
-cd /movie-browser>
+git clone https://github.com/Marshall-Power/movie-browser
+cd /movie-browser
 
 # 2) Install
 npm install
