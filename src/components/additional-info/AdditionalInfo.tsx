@@ -1,11 +1,11 @@
 import { MovieDetails } from '../../types';
 
 type AdditionalInfoProps = {
-  movie: Pick<MovieDetails, 'popularity' | 'runtime' | 'budget' | 'revenue' | 'spoken_languages'>;
+  info: Pick<MovieDetails, 'popularity' | 'runtime' | 'budget' | 'revenue' | 'spoken_languages'>;
 };
 
-export function AdditionalInfo({ movie }: AdditionalInfoProps) {
-  const { popularity, runtime, budget, revenue, spoken_languages } = movie;
+export const AdditionalInfo = ({ info }: AdditionalInfoProps) => {
+  const { popularity, runtime, budget, revenue, spoken_languages } = info;
   const numberFormat = (amount: number): string => {
     return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
   };
@@ -40,4 +40,4 @@ export function AdditionalInfo({ movie }: AdditionalInfoProps) {
       </div>
     </div>
   );
-}
+};

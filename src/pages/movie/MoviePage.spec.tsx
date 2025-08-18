@@ -1,7 +1,6 @@
 import { render, screen, within } from '@testing-library/react';
 import '@testing-library/jest-dom/vitest';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import React from 'react';
 import { MoviePage } from './MoviePage';
 import { MovieDetails } from '../../types';
 
@@ -14,9 +13,8 @@ vi.mock('../../store', () => ({
   }),
 }));
 
-const mockCallbackRef = vi.fn();
 vi.mock('../../hooks', () => ({
-  useTMDBImageSize: <T,>() => [mockCallbackRef as unknown as React.RefCallback<T>, 'w780'] as const,
+  useTMDBImageSize: () => [() => {}, 'w780'] as any,
 }));
 
 vi.mock('../../components', () => {
@@ -101,17 +99,16 @@ describe('MoviePage', () => {
     expect(props.size).toBe('w780');
   });
 
-  it('renders AdditionalInfo with movie props', () => {
+  it('renders AdditionalInfo with info props', () => {
     render(<MoviePage themeKey="scifi" movie={baseMovie as MovieDetails} />);
-
     const node = screen.getByTestId('additional-info');
     expect(node).toBeInTheDocument();
 
     const props = JSON.parse(node.getAttribute('data-props') || '{}');
-    expect(props.movie.id).toBe(1);
-    expect(props.movie.runtime).toBe(163);
-    expect(props.movie.popularity).toBeCloseTo(123.56);
-    expect(props.movie.spoken_languages).toHaveLength(2);
+    console.log(props);
+    expect(props.info.runtime).toBe(163);
+    expect(props.info.popularity).toBeCloseTo(123.56);
+    expect(props.info.spoken_languages).toHaveLength(2);
   });
 
   it('renders wishlist carousel items from the store', () => {

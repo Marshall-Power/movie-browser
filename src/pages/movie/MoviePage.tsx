@@ -17,7 +17,8 @@ interface MoviePageProps {
 
 export const MoviePage = ({ themeKey, movie }: MoviePageProps) => {
   if (!movie) return null;
-  const { id, title, poster_path, backdrop_path } = movie;
+  const { id, title, poster_path, backdrop_path, popularity, runtime, budget, revenue, spoken_languages } = movie;
+  const info = { popularity, runtime, budget, revenue, spoken_languages }
   const currentId = id;
   const { items } = useWishlist();
   const [imageRef, imgSize] = useTMDBImageSize<HTMLDivElement>();
@@ -42,7 +43,7 @@ export const MoviePage = ({ themeKey, movie }: MoviePageProps) => {
 
           <section className="movie-detail__additional">
             <h2>Additional Info</h2>
-            <AdditionalInfo movie={movie} />
+            <AdditionalInfo info={info} />
           </section>
 
           {items.length ? (

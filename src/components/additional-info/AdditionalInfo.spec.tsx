@@ -4,7 +4,7 @@ import { AdditionalInfo } from './AdditionalInfo';
 test('renders movie additional info', () => {
   render(
     <AdditionalInfo
-      movie={{
+      info={{
         popularity: 123.56,
         runtime: 137,
         budget: 1000,
